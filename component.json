@@ -1,0 +1,13 @@
+{
+  "name": "plugin.automap",
+  "slug": "automap",
+  "source": "automap",
+  "world": "automap-plugin",
+  "binding": "automap_plugin",
+  "members": [
+    "automap"
+  ],
+  "artifacts": [
+    "plugin.automap.wasm"
+  ]
+}

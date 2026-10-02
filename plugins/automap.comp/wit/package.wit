@@ -1,0 +1,26 @@
+package gams:automap@1.0.0;
+
+interface automap {
+    type data-entry = tuple<string, string>;
+
+    record tile-layer {
+        width: u32,
+        data: list<u32>,
+        props: list<data-entry>,
+    }
+
+    record tile-map {
+        layers: list<tile-layer>,
+        props: list<data-entry>,
+    }
+
+    apply: func(rules: tile-map, input: tile-map, target: option<tile-map>) -> result<tile-map, string>;
+}
+
+world automap-plugin {
+    include wasi:cli/imports@0.2.0;
+
+    import wasi:random/random@0.2.0;
+
+    export automap;
+}
