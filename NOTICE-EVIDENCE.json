@@ -34,13 +34,44 @@
       "dist/plugin.automap.wasm": "plugins/automap.comp.wasm"
     }
   },
+  "documentation_cleanup": {
+    "audit_origin": "audit_generator_sha256 and audit_input_sha256 identify the preserved historical audit; that generator was not rerun for this delta",
+    "baseline_commit": "5c8b34c9f6334c1f2945ab55e08e51181267d453",
+    "changed_inputs": {
+      "README.md": {
+        "after": "2c1405f4faf8c6ce75b2ac55191badf66d1065e897cd7997d78bc949cbdcf83d",
+        "before": "c0b051c43a612395eaf39937613138bf63bf52fec2ca98d78eb546aa22558c18"
+      },
+      "SOURCE-INPUTS.json": {
+        "after": "c3c0171b60f89dfc3f6036839407ed990b54af064115cd90082de2985add756d",
+        "before": "4de5b2c64902f07b3a0db2d2c929a84aa069ada87db6f513803414ba949f2a21"
+      },
+      "scripts/build.py": {
+        "after": "883e0420eb90e6d297a8b4346bf2bc96894d3e3b690381fd7df4b07685e72e3a",
+        "before": "40e1ddf6e4bdda34d4456411bcbfa0850a2905b467d4a1ca7448cee634be396d"
+      },
+      "scripts/publication.py": {
+        "after": "058cdb64ab19ec1db7650531b2910ddb6c465764c888d208b683b14c87fcd2ad",
+        "before": "f4c97f3a84c866942e7427392d156144aff53f35e4149c2def3c171368bd8391"
+      }
+    },
+    "previous_evidence_sha256": "84620387f29f0d9f5cbe9924607ac32ba608fa4c04b6cf5f9e1e7dd875640c15",
+    "previous_notice_sha256": "1ea034410379126efdfa7fc3a594d4c692a2de4ebd152347d2d46a79a17988fc",
+    "previous_source_inputs_sha256": "4de5b2c64902f07b3a0db2d2c929a84aa069ada87db6f513803414ba949f2a21",
+    "publication_approval": "not granted; review and approve the new NOTICE digest and final hosted candidate before publication",
+    "refresh_script_sha256": "4bff4cb2679198fcacbff6e626e4105aca5df6c2eab821a77861c143a2f26cc2",
+    "removed_documents": {
+      "CONTEXT.md": "ba68ad089c2e9db0389b3444e8b9b621376e47663aa748e7745bbb708e953a71",
+      "PREPARATION.md": "6ecd4a133653f24c8d394af9937368d4d70be4595904afc2991709a8f7448d4d"
+    },
+    "rule": "Only documentation removal/rewrite, documentation-reference strings, and exact input-manifest refresh. Third-party source, terms, NOTICE body, toolchains, tests, and verification rules are unchanged."
+  },
   "files_sha256": {
     ".envrc": "1d26c74fd25a4c3dbb09e029fc609588da499fd4af2a41c88f6316c7f8c54cf1",
     ".gitattributes": "02a00a5e791aceec9288ce23f6ccdd26fb5356bc6da5f926c1866c1b906d1d8e",
     ".github/workflows/release.yml": "5b57d05928f471eb1ef792ae9be6aab02aaf70e557be0c62433c88cdd9080479",
     ".github/workflows/verify.yml": "ec66e6d7ccc76ebd1f77f725f5be0b83f783ff0efbbf4655658146a99ddc470b",
     ".gitignore": "35d5cf3e93f7c09e8bf44231a378d77943e69e97b4f5dc266e14053e1c45d541",
-    "CONTEXT.md": "ba68ad089c2e9db0389b3444e8b9b621376e47663aa748e7745bbb708e953a71",
     "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "LICENSES/CC0-1.0.txt": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
     "LICENSES/W3C-Community-CLA.html": "14e40793d59248a0af6ecf2b6e9f705e4a950a21fe4c3365e4b5fa319df4e15f",
@@ -63,9 +94,8 @@
     "LICENSES/wit-bindgen-MIT.txt": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
     "LICENSING.md": "9c90a7d909f589c226e600b2cd66f551d7769ba9de2b67fc2ee5e9d751de256e",
     "Makefile": "bebe6c97ccd2d043a593ba5e1a2b27a0c4ff036f2ece06745806deead7d257bf",
-    "PREPARATION.md": "6ecd4a133653f24c8d394af9937368d4d70be4595904afc2991709a8f7448d4d",
-    "README.md": "c0b051c43a612395eaf39937613138bf63bf52fec2ca98d78eb546aa22558c18",
-    "SOURCE-INPUTS.json": "4de5b2c64902f07b3a0db2d2c929a84aa069ada87db6f513803414ba949f2a21",
+    "README.md": "2c1405f4faf8c6ce75b2ac55191badf66d1065e897cd7997d78bc949cbdcf83d",
+    "SOURCE-INPUTS.json": "c3c0171b60f89dfc3f6036839407ed990b54af064115cd90082de2985add756d",
     "THIRD-PARTY-REVIEW.md": "cfb3970d43fa035b9741ae5f3f6054f7f80282b42516c6e494c02025b7e3f127",
     "THIRD-PARTY-SOURCE.json": "775eac85bbb6343bf9ef933d86e4992ecf90506e5d9beb317a38b2aa261987c1",
     "component.json": "1d55958d86ce2d2ab3c97fa9adafa2a6929c4522fb71bf485914ff74e611515d",
@@ -107,7 +137,7 @@
     "plugins/automap.comp/wit/deps/sockets/world.wit": "9281c12b9611117e98674eb3f00bd9c4eb2e49f1386f0d6173b9c88181180d12",
     "plugins/automap.comp/wit/package.wit": "3f1a021a90603208c5a49302a8be7d980582549b2a1cb782f849a764a9384336",
     "plugins/automap.comp/wkg.lock": "ddc1d61746c3c787dc3c9d841ba62f07d4c4d48602cb354e17cdb0908eb36cb0",
-    "scripts/build.py": "40e1ddf6e4bdda34d4456411bcbfa0850a2905b467d4a1ca7448cee634be396d",
+    "scripts/build.py": "883e0420eb90e6d297a8b4346bf2bc96894d3e3b690381fd7df4b07685e72e3a",
     "scripts/candidate.py": "a75a8b1aec7af8e1ef5a78885d65945b848af5e5082a0323d952e89c43fe2f71",
     "scripts/check-licensing-digests.sh": "0dfa34f834af2e065e8cbf325cc8eaf2beaf6dc60093f802466799c48d59ff21",
     "scripts/check-release-absent.sh": "789b3ddb1d32582b4fdbf98cafd0ccb847e91c0d65fa39489ec123a399a72d7c",
@@ -115,7 +145,7 @@
     "scripts/check-source.py": "b4bff79c8d7d13ea121d9e18a921084c0e076474a631de8c430701873440a72c",
     "scripts/inputs.py": "c61e7cd875d429d623d083da40c65639b2b311cb1a046bad5316efa1229e71d7",
     "scripts/legal.py": "6e9633f143a4cc609c676c68541b5238fdc85c1454bdc898fc6367dc29f331f0",
-    "scripts/publication.py": "f4c97f3a84c866942e7427392d156144aff53f35e4149c2def3c171368bd8391",
+    "scripts/publication.py": "058cdb64ab19ec1db7650531b2910ddb6c465764c888d208b683b14c87fcd2ad",
     "scripts/tooling.py": "d98e1f61e60ee1d600a23d719a3637d2cc8b5249e37c890180528b3223b5ea34",
     "scripts/wasm-notices.py": "91d94800f753ae948e9289393da9b6b63f6dc24e154a41fbdae2fd59f9305d85",
     "test/runtime.mjs": "d0bcae167cdbf0b4bc9f6a02821a03a8d7469fdaa18a14a10ca2ddcca0ea1c7c",
@@ -280,7 +310,7 @@
   },
   "repository": "plugin.automap",
   "schema": 1,
-  "scope": "selected prepared repository/source inputs; no build executed",
+  "scope": "historical third-party source audit plus bounded documentation cleanup; no new build or audit executed",
   "shipped_host_source_files": [],
   "source_comparison_exclusions": {
     "directories": [

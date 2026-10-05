@@ -1,56 +1,70 @@
-# Standalone GAMS plugin
+# plugin.automap
 
-See `component.json` for distribution artifacts and unchanged WIT worlds.
-All source/build inputs live here; no sibling repositories or original checkout
-are consulted. Native SDK helper copies are limited to the pure-Go packages used
-by these plugins. Generated bindings and binaries are not extraction inputs.
+GAMS WASM Project Unit for rule-based tile-map transformations.
+The component exports `gams:automap/automap@1.0.0` through the `automap-plugin`
+world. Distribution and WIT interface versions are independent.
 
+## API
+
+The contract is in `plugins/automap.comp/wit/package.wit`:
+
+```text
+apply(rules, input, target?) -> result<tile-map, string>
 ```
-nix develop --command make test
+
+Maps contain layers and string-pair properties. Each layer has a width, a flat
+list of tile values, and its own properties. `apply` accepts a rules map, an
+input map, and an optional target map, and returns a transformed map or an error.
+
+The Host supplies the world's WASI imports, including randomness. Plugin Manager
+resolves component imports; distribution filenames do not rename WIT identities.
+
+## Build and test
+
+All source/build inputs are owned by this repository; no sibling checkout is
+required. Use the pinned Nix environment:
+
+```sh
 nix develop --command make build
+nix develop --command make test
 ```
 
-The lockfile pins Nixpkgs, Odin db0cd7963, WASI SDK 33, wasm-tools 1.248.0 and
-wit-bindgen 0.57.1. Nixpkgs supplies Go 1.25/TinyGo; Go sums lock modules and
-package-lock locks jco test tooling. `.envrc` supports `direnv allow` locally.
-Network access may be needed to acquire pinned tools/modules.
+Output: `dist/plugin.automap.wasm`. Install it in an external GAMS Project as
+`plugins/automap.comp.wasm`; configure that Project separately.
 
-`make test` validates the real built components. Go plugins run native source
-unit tests; Markov runs XML/MJIR compiler tests. Pack, random and SQL additionally
-run jco-transpiled component runtime assertions. Other plugins currently have
-static validation only. Original tests remain in source for reference; tests that
-invoke cmd/app or a sibling MarkovJunior checkout are NOT standalone tests and
-are NOT run/claimed. See PREPARATION.md for blockers.
+The flake and lockfiles pin the toolchain. Network access may be required to
+fetch tools. `.envrc` supports `direnv allow`.
 
-Markov additionally produces a deterministic versioned tooling ZIP retaining the
-XML compiler, CLI, resource XMLs, documentation, compiler tests and historical
-parity tooling. The ZIP is not a fake WASM artifact or claimed complete parity
-runner; historical parity requires further host/reference extraction.
+`make test` runs offline integrity/publication regression tests, builds the
+component, validates its WASM, extracts its WIT, and checks the exact input
+inventory. It does **not** exercise the Automap API in a standalone WASM runtime.
+Build success does not establish rule behavior or Host integration coverage.
 
-## Publishing (owner operated)
+## Licensing and releases
 
-GAMS-authored source is Apache-2.0. Upstream source headers are retained verbatim;
-THIRD-PARTY-SOURCE.json binds review inputs. NOTICE is an inventory awaiting the
-separate source-bound legal audit, not legal approval. Final candidate/tag gates
-require that audit's NOTICE-EVIDENCE.json, THIRD-PARTY-REVIEW.md, LICENSING.md and
-LICENSES/ closure; unresolved permission blockers fail closed. Legal texts and
-evidence are included in WASM release assets (including LICENSES.zip), and all
-are retained inside Markov's compiler/tooling ZIP. Review toolchain-linked
-runtime/adapter terms too before approving digests. No binary distribution is
-approved by preparation.
+GAMS-authored contributions are Apache-2.0. Third-party code retains its own
+terms; see `LICENSING.md`, `THIRD-PARTY-REVIEW.md`, and `LICENSES/`.
+Source inventory and notice evidence are checked before candidate packaging.
+Changed inputs require refreshed evidence and review of the resulting digests;
+checksum consistency alone is not legal or publication approval.
 
-After the legal audit, set repository-scoped Actions variables LICENSE_SHA256 and
-NOTICE_SHA256 to exact lowercase SHA-256 digests of reviewed texts. A local
-candidate uses APPROVED_LICENSE_SHA256 and APPROVED_NOTICE_SHA256. Changes to
-source evidence require renewed review/update of THIRD-PARTY-SOURCE.json.
+Distribution is through GitHub Releases, not npm or OCI. Before publishing:
 
-Push the owner-reviewed `release` branch and inspect the exact hosted candidate;
-branch verification without digests uploads nothing. Rehearse release.yml by
-manual dispatch on `release` (verifies, never publishes). Only then tag that exact
-commit as v<version.txt>. Never move/reuse a published or failed tag.
+1. Review the current source, third-party evidence, and final linked artifact.
+   Hosted build/candidate review and runtime validation remain outstanding until
+   independently recorded; preparation or local tests do not clear them.
+2. Set repository-scoped `LICENSE_SHA256` and `NOTICE_SHA256` Actions variables
+   to the exact reviewed texts. Local rehearsal uses
+   `APPROVED_LICENSE_SHA256` and `APPROVED_NOTICE_SHA256`.
+3. Push the reviewed `release` branch and inspect its hosted candidate. Without
+   approved digests, branch checks do not distribute a candidate. Manual release
+   workflow dispatch verifies but does not publish.
+4. Tag that reviewed release-branch commit as `v<version.txt>`. Never reuse or
+   move a published or failed tag. Publication requires immutable-release policy,
+   canonical repository/version identity, exact artifacts and checksums, embedded
+   notices, and complete readable legal assets. An existing release blocks creation.
 
-Tag jobs require canonical kkgams repository, matching version and current release
-branch head, both approved legal digests, exact complete artifacts, embedded WASM
-notices and checksum verification. Publication refuses existing GitHub Releases.
-GitHub Release is the only configured distribution channel (no OCI publication).
-No preparation command creates Git repositories/remotes, pushes or tags.
+The publication workflow rehearses a private draft's bytes before publication
+and checks the anonymous public bytes afterward. Keep LICENSE, NOTICE, evidence,
+review documents, and applicable LICENSES with distributed artifacts. See the
+repository's release workflow and scripts for the enforced gates.
