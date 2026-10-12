@@ -24,10 +24,10 @@
   "LICENSES/wasmtime-Apache-LLVM.txt": "268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
   "LICENSES/wit-bindgen-Apache.txt": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
   "LICENSES/wit-bindgen-MIT.txt": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
-  "LICENSING.md": "9c90a7d909f589c226e600b2cd66f551d7769ba9de2b67fc2ee5e9d751de256e",
+  "LICENSING.md": "5ab40c24f99a7a4ef4e26af2f1aec0e769d3d4b6c19383bf27904fe51d87d60c",
   "Makefile": "bebe6c97ccd2d043a593ba5e1a2b27a0c4ff036f2ece06745806deead7d257bf",
-  "README.md": "2c1405f4faf8c6ce75b2ac55191badf66d1065e897cd7997d78bc949cbdcf83d",
-  "THIRD-PARTY-REVIEW.md": "cfb3970d43fa035b9741ae5f3f6054f7f80282b42516c6e494c02025b7e3f127",
+  "README.md": "171b6736afb2dde654f919ad90daec395841849543a889982cf2e910b973b13e",
+  "THIRD-PARTY-REVIEW.md": "6dc71139d34259ed413474a8500891efe1708476b4be11bcf804612ac31e1a21",
   "THIRD-PARTY-SOURCE.json": "775eac85bbb6343bf9ef933d86e4992ecf90506e5d9beb317a38b2aa261987c1",
   "component.json": "1d55958d86ce2d2ab3c97fa9adafa2a6929c4522fb71bf485914ff74e611515d",
   "flake.lock": "3adbe3447e662145dd50a383489f62e7bfbe16996281e113b1fbac347eca3eae",
@@ -153,5 +153,5 @@
   "third_party/wasi-0.2.0/sockets/wit/udp-create-socket.wit": "058da3ade225a22ae9f7329453a51cf55174f3253b7a4163d10bc46bc7c53b85",
   "third_party/wasi-0.2.0/sockets/wit/udp.wit": "411998b320d08fce10400c840f0ca0ebef49c5a4fb13f94011bbce2bbd5972fc",
   "third_party/wasi-0.2.0/sockets/wit/world.wit": "9281c12b9611117e98674eb3f00bd9c4eb2e49f1386f0d6173b9c88181180d12",
-  "version.txt": "1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9"
+  "version.txt": "71015c979ccb0fc8a0be7ca0ae83046ab045cdc2c8faa09fb2f0f7e440f9b4a6"
 }

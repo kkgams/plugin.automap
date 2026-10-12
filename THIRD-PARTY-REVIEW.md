@@ -15,6 +15,14 @@ Complete umbrella notice, original IO notice and frozen full W3C CLA HTML are re
 - Pinned upstream license comparisons establish readable terms, not the version of every historical imported fragment. Newly discovered identifiable missing permissions remain blockers; historical lineage uncertainty alone does not veto approved GAMS-authored work.
 - Build tools (jco, wit-bindgen, C#/Odin parity runners) are not automatically distributed runtime code. Go module inventory conservatively includes generator-only dependencies. Final linked runtime and standard adapters require hosted build evidence.
 
+## Current owner release instruction — 2026-10-12
+
+The owner confirmed checksum/license preparation complete and dropped pending
+owner reviews for 0.2.1 local preparation, commits and annotated tags. Historical
+audit findings and limitations above are preserved, not retroactively certified.
+This instruction does not claim hosted tests, final artifact verification or
+runtime coverage passed, and does not change exact terms or publication gates.
+
 ## Identifiable permission blockers
 
 None identified in this selected prepared closure. This does not clear existing record blockers, new findings, or final artifact review.
