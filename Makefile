@@ -11,7 +11,7 @@ WIKI_VERSION := v1.4.0
 WIKI_REPOSITORY := https://github.com/justgook/wiki
 WIKI_MAKEFILE := build.nosync/wiki-$(WIKI_VERSION).mk
 WIKI_ENGINE := $(abspath build.nosync/wiki-$(WIKI_VERSION))
-WIT := $(shell find plugins/automap.comp/wit -type f)
+WIT := $(shell find plugins/automap.comp/wit -type f -o -type d)
 LEGAL := LICENSE NOTICE LICENSING.md $(sort $(wildcard LICENSES/*))
 export PYTHONDONTWRITEBYTECODE := 1
 export TMPDIR := $(abspath build.nosync/tmp)
@@ -27,7 +27,7 @@ build.nosync/automap/automap_plugin.c build.nosync/automap/automap_plugin.h buil
 	mkdir -p build.nosync/automap
 	cd build.nosync/automap && wit-bindgen c ../../plugins/automap.comp/wit -w automap-plugin
 
-build.nosync/TERMS: $(LEGAL) Makefile | build.nosync/tmp
+build.nosync/TERMS: $(LEGAL) LICENSES Makefile | build.nosync/tmp
 	for file in $(LEGAL); do printf '\n--- %s ---\n' "$$file"; cat "$$file"; done > "$@"
 
 build.nosync/plugin.automap.wasm: plugins/automap.comp/component.c build.nosync/automap/automap_plugin.c build.nosync/automap/automap_plugin.h build.nosync/automap/automap_plugin_component_type.o build.nosync/TERMS scripts/wasm-notices.py Makefile flake.lock
@@ -37,7 +37,7 @@ build.nosync/plugin.automap.wasm: plugins/automap.comp/component.c build.nosync/
 	$(PYTHON) scripts/wasm-notices.py embed "$@" --license build.nosync/TERMS --notice NOTICE
 	wasm-tools validate "$@"
 
-build.nosync/LICENSES.zip: $(LEGAL) Makefile | build.nosync/tmp
+build.nosync/LICENSES.zip: $(LEGAL) LICENSES Makefile | build.nosync/tmp
 	rm -f "$@"
 	zip -q -X "$@" $(LEGAL)
 
