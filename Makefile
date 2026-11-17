@@ -1,6 +1,9 @@
 SHELL := bash
 .SHELLFLAGS := -eu -o pipefail -c
 .DEFAULT_GOAL := build
+
+component_compile_flags = -I$(1) -O2 -DNDEBUG
+
 PYTHON ?= python3
 CURL ?= curl
 GAMS_RELEASE_API ?= https://api.github.com/repos/kkgams/gams/releases/latest
@@ -31,7 +34,7 @@ build.nosync/TERMS: $(LEGAL) LICENSES Makefile | build.nosync/tmp
 	for file in $(LEGAL); do printf '\n--- %s ---\n' "$$file"; cat "$$file"; done > "$@"
 
 build.nosync/plugin.automap.wasm: plugins/automap.comp/component.c build.nosync/automap/automap_plugin.c build.nosync/automap/automap_plugin.h build.nosync/automap/automap_plugin_component_type.o build.nosync/TERMS scripts/wasm-notices.py Makefile flake.lock
-	wasm32-wasip2-clang -o "$@" -mexec-model=reactor -Ibuild.nosync/automap -O2 -DNDEBUG build.nosync/automap/automap_plugin.c plugins/automap.comp/component.c build.nosync/automap/automap_plugin_component_type.o -Wl,--strip-all
+	wasm32-wasip2-clang -o "$@" -mexec-model=reactor $(call component_compile_flags,build.nosync/automap) build.nosync/automap/automap_plugin.c plugins/automap.comp/component.c build.nosync/automap/automap_plugin_component_type.o -Wl,--strip-all
 	wasm-tools strip -a "$@" -o "$@.strip"
 	mv "$@.strip" "$@"
 	$(PYTHON) scripts/wasm-notices.py embed "$@" --license build.nosync/TERMS --notice NOTICE
@@ -75,3 +78,10 @@ $(WIKI_MAKEFILE): | build.nosync/tmp
 
 docs serve-docs validate-docs: $(WIKI_MAKEFILE)
 	$(MAKE) -f "$(WIKI_MAKEFILE)" "$(if $(filter docs,$@),build,$(patsubst %-docs,%,$@))" WIKI_REPOSITORY="$(WIKI_REPOSITORY)" WIKI_VERSION="$(WIKI_VERSION)" WIKI_ENGINE="$(WIKI_ENGINE)" WIKI_SOURCE="$(abspath docs)" WIKI_OUTPUT="$(abspath build.nosync/site)" PORT="$(DOCS_PORT)"
+
+.PHONY: compile_commands.json
+compile_commands.json: build.nosync/compile_commands.json
+
+build.nosync/compile_commands.json: Makefile flake.nix flake.lock scripts/compile-commands.py plugins/automap.comp/component.c build.nosync/automap/automap_plugin.c build.nosync/automap/automap_plugin.h $(wildcard plugins/automap.comp/*.h) | build.nosync/tmp
+	@$(PYTHON) scripts/compile-commands.py "wasm32-wasip2-clang" $(call component_compile_flags,build.nosync/automap) -- build.nosync/automap/automap_plugin.c plugins/automap.comp/component.c > "$@.tmp"
+	@mv "$@.tmp" "$@"
