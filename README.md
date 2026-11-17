@@ -18,7 +18,7 @@ Use the pinned toolchain with `nix develop --command make <target>`.
 | `make docs` | Build the pinned wiki in `build.nosync/site/`. |
 | `make serve-docs` | Serve docs; independent `DOCS_PORT` defaults to 8080. |
 | `make validate-docs` | Validate wiki content. |
-| `make clean` | Remove build.nosync and identified managed downloads; refuse tracked paths and symlinks, preserve supplied tools/Units. |
+| `make clean` | Remove all of `build.nosync/`, `tools/` and `gams_modules/`, including unmarked contents; refuse tracked files and symlinks before deleting anything. |
 
 The local Files View browses the Project; it is not an Automap editor. First launch downloads pinned supporting Units. An existing Host is never updated implicitly. No Automap runtime/domain tests exist; compilation validates WASM, not rule behavior or Host integration.
 

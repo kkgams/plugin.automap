@@ -64,8 +64,7 @@ tools/gams.app:
 		test -x "$$stage/unpacked/GAMS.app/Contents/MacOS/gams"; \
 		mv "$$stage/unpacked/GAMS.app" "$$stage/GAMS.app"; \
 		mv "$$stage/unpacked" tools/gams-release-notices; \
-		mv "$$stage/GAMS.app" "$@"; \
-		printf 'plugin.automap Makefile Host download\n' > tools/gams-release-notices/.gams-managed
+		mv "$$stage/GAMS.app" "$@"
 
 open: build tools/gams.app
 	GAMS_APP_CWD="$(CURDIR)" ./tools/gams.app/Contents/MacOS/gams
