@@ -921,13 +921,13 @@ static bool rule_match(Rule *r, Map *m, int idx) {
 static void ensure_layer(Layer *l, int w, int h) {
   if ((int)l->width == w && layer_height(l) == h)
     return;
-  uint32_t *nd = xcalloc((size_t)w * h, sizeof(uint32_t));
+  uint32_t *new_data = xcalloc((size_t)w * h, sizeof(uint32_t));
   int cw = imin(l->width, w), ch = imin(layer_height(l), h);
   for (int y = 0; y < ch; y++)
     for (int x = 0; x < cw; x++)
-      nd[y * w + x] = l->data[y * l->width + x];
+      new_data[y * w + x] = l->data[y * l->width + x];
   l->width = w;
-  l->data = nd;
+  l->data = new_data;
   l->data_len = (size_t)w * h;
 }
 static const char *default_name(const char *sel, int idx) {
